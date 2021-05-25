@@ -67,7 +67,7 @@ export class CartService {
       const query = `SELECT c.cart_id, ci.*, p.* from travelshop.cart c
                       INNER JOIN travelshop.cart_item ci on ci.cart_id=c.cart_id
                       INNER JOIN travelshop.products p on p.product_id=ci.product_id
-                      WHERE c.user_id=${user_id};`
+                      WHERE c.user_id=${user_id} and c.is_active=true;`
       return queryPromise(query)
         .then((results: any) => {
           if (!results || results.length === 0) {
