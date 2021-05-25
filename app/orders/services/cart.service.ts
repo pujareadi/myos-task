@@ -17,11 +17,7 @@ export class CartService {
       const query = `INSERT INTO travelshop.cart(user_id, is_active) VALUES (${user_id}, true);`;
       return queryPromise(query)
             .then((results: any) => {
-              if (!results || results.length === 0) {
-                return [];
-              } else{
-                return results;
-              }
+              return true;
             });
     }
 
@@ -32,11 +28,7 @@ export class CartService {
       }
       return queryPromise(query)
             .then((results: any) => {
-              if (!results || results.length === 0) {
-                return [];
-              } else{
-                return results;
-              }
+              return true;
             });
     }
 
@@ -44,13 +36,7 @@ export class CartService {
       const query = `INSERT INTO travelshop.cart_item(product_id, cart_id, quantity) VALUES (${product_id},${cart_id}, ${quantity});`;
       return queryPromise(query)
             .then((results: any) => {
-              console.log(results)
-              if (!results || results.length === 0) {
-                return [];
-              } else{
-                console.log('result ', results);
-                return results;
-              }
+              return true;
             });
     }
 
@@ -90,5 +76,14 @@ export class CartService {
           return results;
         });
     };
+    
+    makeCartInactive(cart_id: number) {
+        var query = `UPDATE travelshop.cart SET is_active=false WHERE cart_id=${cart_id}`;
+        return queryPromise(query)
+            .then((results: any) => {
+              return true;
+            });
+        
+    }
 
 }
