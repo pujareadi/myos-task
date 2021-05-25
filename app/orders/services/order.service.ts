@@ -31,11 +31,7 @@ export class OrderService {
       const order_item_query = `INSERT INTO travelshop.order_item(order_id, product_id, quantity, unit_price, fulfilled_quantity) VALUES (${order_id}, ${product_id}, ${quantity}, ${price}, ${quantity});`
       return queryPromise(order_item_query)
             .then((results: any) => {
-              if (!results || results.length === 0) {
-                return [];
-              } else{
-                return results;
-              }
+              return true;
             });
     }
 
