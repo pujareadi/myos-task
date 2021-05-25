@@ -44,7 +44,8 @@ export class OrderService {
       const cartService = CartService.getInstance();
       var activeCart: any[] = await cartService.getActiveCart(user_id);
       console.log(activeCart)
-      if (activeCart.length === 0 || activeCart[0].cart_id != cart_id) {
+      if (activeCart.length == 0 || activeCart[0].cart_id != cart_id) {
+        console.log(cart_id);
         return "Order creation failed";
       }
       await this.createNewOrder(user_id, cart_id, address_id);

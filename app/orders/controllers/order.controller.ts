@@ -25,7 +25,7 @@ export class OrderController {
         const orderService = OrderService.getInstance();
         const user_id = Number(req.headers.user_id);
         const address_id = Number(req.body.address_id);
-        const cart_id = Number(req.headers.cart_id);
+        const cart_id = Number(req.body.cart_id);
         const orderId = await orderService.createOrder(user_id, address_id, cart_id);
         res.status(200).send({id: orderId});
     }
