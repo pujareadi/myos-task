@@ -40,6 +40,7 @@ export class OrderService {
     }
 
     // Create order only with COD option
+    // This should be in trasaction i.e on failure rollback code not written
     async createOrder(user_id: number, address_id: number, cart_id: number) {
       const cartService = CartService.getInstance();
       var activeCart: any[] = await cartService.getActiveCart(user_id);
@@ -53,6 +54,7 @@ export class OrderService {
       activeCart.forEach(async (cart_item) =>  { 
           await this.createNewOrderItem(Number(order.order_id), Number(cart_item.product_id), Number(cart_item.price), Number(cart_item.quantity));
       });
+      await cartService.makeCartInactive(cart_id);
       return "Order created"
       
     }
