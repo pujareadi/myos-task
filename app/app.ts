@@ -6,6 +6,7 @@ import * as winston from 'winston';
 import * as expressWinston from 'express-winston';
 import {ProductRoutes} from './products/products.routes.config';
 import {CartRoutes} from './orders/cart.routes.config';
+import {OrderRoutes} from './orders/orders.routes.config';
 
 const app: express.Application = express();
 
@@ -41,6 +42,7 @@ app.use(expressWinston.logger({
 
 new ProductRoutes(app);
 new CartRoutes(app);
+new OrderRoutes(app);
 
 app.use(expressWinston.errorLogger({
     transports: [

@@ -1,26 +1,31 @@
 import {CommonRoutesConfig, configureRoutes} from '../common/common.routes.config';
 import {OrderController} from './controllers/order.controller';
+import {UsersMiddleware} from '../common/users.middleware'
 
 import express from 'express';
 
-export class ProductRoutes extends CommonRoutesConfig implements configureRoutes {
+export class OrderRoutes extends CommonRoutesConfig implements configureRoutes {
     constructor(app: express.Application) {
-        super(app, 'ProductRoute');
+        super(app, 'OrderRoute');
         this.configureRoutes();
     }
 
     configureRoutes() {
-        const productController = new OrderController();
+        const orderController = new OrderController();
+        const usersMiddleware = UsersMiddleware.getInstance();
         this.app.get(`/api/orders`, [
-            productController.listOrders
+            usersMiddleware.validateUser,
+            orderController.listOrders
         ]);
 
-        // this.app.post(`/api/products`, [
-        //     productController.createProduct
-        // ]);
+        this.app.post(`/api/orders`, [
+            usersMiddleware.validateUser,
+            orderController.createOrder
+        ]);
         
         this.app.get(`/api/orders/:orderId`, [
-            productController.getOrderById
+            usersMiddleware.validateUser,
+            orderController.getOrderById
         ]);
     }
 
