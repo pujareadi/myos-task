@@ -2,6 +2,8 @@
 -------------
 This is NodeJS + Typscript application, along with Jest setup for TDD. For database we are using postgreSql with minimal DB structure.
 
+### Trasaction management is not handled in this code. Which must atleast during order placement.
+
 Also there are so many edge case handling missing in this repository. As this bare minimum code for understanding.(like for search operation we need elasticSerach or similar approach, All module should be separate microservice considering horizontal scalability etc)
 
 ![alt text](./myos_basic_table_str.jpg)
